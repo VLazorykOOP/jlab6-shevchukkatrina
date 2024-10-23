@@ -62,12 +62,10 @@ public class MatrixGUI extends JFrame {
 
         add(resultPanel, BorderLayout.SOUTH);
 
-        // Додати обробку подій для кнопок
         loadButton.addActionListener(new LoadButtonListener());
         calculateButton.addActionListener(new CalculateButtonListener());
     }
 
-    // Обробник для завантаження даних з файлу
     private class LoadButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -87,7 +85,6 @@ public class MatrixGUI extends JFrame {
         }
     }
 
-    // Обробник для виконання обчислень
     private class CalculateButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -104,9 +101,8 @@ public class MatrixGUI extends JFrame {
         }
     }
 
-   // Завантаження матриць з файлу
    private void loadMatricesFromFile(String filePath) throws FileNotFoundException, CustomArithmeticException {
-    try (Scanner scanner = new Scanner(new File(filePath))) {  // Використання try-with-resources
+    try (Scanner scanner = new Scanner(new File(filePath))) {  
         n = scanner.nextInt();
 
         if (n > 15) {
@@ -116,7 +112,7 @@ public class MatrixGUI extends JFrame {
         matrixA = new int[n][n];
         matrixB = new int[n][n];
 
-        // Завантаження матриці A
+        // A
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (!scanner.hasNextInt()) {
@@ -126,7 +122,7 @@ public class MatrixGUI extends JFrame {
             }
         }
 
-        // Завантаження матриці B
+        // B
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (!scanner.hasNextInt()) {
@@ -139,7 +135,6 @@ public class MatrixGUI extends JFrame {
 }
 
 
-    // Заповнення таблиці
     private void fillTable(JTable table, int[][] matrix) {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -148,7 +143,6 @@ public class MatrixGUI extends JFrame {
         }
     }
 
-    // Метод для перевірки, чи рядок збігається зі стовпчиком
     private boolean isRowEqualToColumn(int[][] A, int[][] B, int rowIndex, int colIndex) {
         for (int i = 0; i < A.length; i++) {
             if (A[rowIndex][i] != B[i][colIndex]) {
@@ -158,7 +152,6 @@ public class MatrixGUI extends JFrame {
         return true;
     }
 
-    // Метод для створення вектора X
     private int[] createVectorX(int[][] A, int[][] B) {
         int[] X = new int[n];
         for (int i = 0; i < n; i++) {
